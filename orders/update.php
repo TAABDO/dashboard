@@ -3,22 +3,23 @@ include "conection.php";
 
 $id=$_GET['id'];
 
+$requete="SELECT * FROM orderes";
+$result=mysqli_query($connect,$requete);
+$row=mysqli_fetch_assoc($result);
 
 if(isset($_POST['submit'])){
 
-
-  $d_reservation = date('Y-m-d',strtotime($_POST['date_reservation']));
-  $TableNumber = $_POST['TableNumber'] ;
-  $Num_client = $_POST['client'] ;
+  $Order_Name = $_POST['Order_Name'];
+   $client_Name = $_POST['client_Name'];
+   $Location = $_POST['Location'];
+   $Price = $_POST['Price'];
 
   $update="UPDATE `reservation`
-  SET `date_reservation`=$d_reservation , `TableNumber`=$TableNumber , `client_id`=$Num_client  WHERE id = $id ";
+  SET `Order_Name`= '$Order_Name', `date_reservation`= '$Order_Name' , `TableNumber`='$client_Name' , `client_id`='$Location' WHERE id = $id ";
 
   $resultupdate = mysqli_query($connect,$update);
 
-
 }
-
 
 ?>
 
@@ -41,7 +42,6 @@ if(isset($_POST['submit'])){
     </style>
 </head>
 
-
 <body>
 
 
@@ -53,31 +53,31 @@ if(isset($_POST['submit'])){
 				<p>Here's what's happening with your store today.</p>
 			</div>
 			<div class=" offset-lg-3 col-lg-3 col-md-6 col-sm-12 btns">
-				<button><a href="reservation.php"> < Go Back </a></button>
+				<button><a href="orders.php"> < Go Back </a></button>
 				
 			</div>
 		</div>
 	</div>
-<form class="formajouter" method="POST" Methode="reservation.php">
+<form class="formajouter" method="POST" >
 
   
-  <!-- <div class="mb-3">
-    <label for="exampleInputorder" class="form-label" style="color:white">NumReservation</label>
-    <input type="text" name="NumReservation" class="form-control w-50" id="exampleInputorder" aria-describedby="orderHelp">
-    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-  </div> -->
   <div class="mb-3">
-    <label for="exampleInputdelivery_adresse" class="form-label" style="color:white">date_reservation</label>
-    <input type="text" name="date_reservation" class="form-control w-50" id="exampleInputdelivery_adresse" placeholder="YYYY/MM/DD">
+    <label for="exampleInputorder" class="form-label" style="color:white">Order_Name</label>
+    <input type="text" name="Order_Name" value="<?php echo $row['Order_Name'] ?>" class="form-control w-50" id="exampleInputorder" aria-describedby="orderHelp">
+    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+  </div> 
+  <div class="mb-3">
+    <label for="exampleInputdelivery_adresse" class="form-label" style="color:white">client_Name</label>
+    <input type="text" name="client_Name" value="<?php echo $row['client_Name'] ?>"class="form-control w-50" id="exampleInputdelivery_adresse" placeholder="YYYY/MM/DD">
   </div>
   <div class="mb-3">
-    <label for="exampleInputvalue" class="form-label" style="color:white">TableNumber</label>
-    <input type="text" name="TableNumber" class="form-control w-50" id="exampleInputvalue" aria-describedby="valueHelp">
+    <label for="exampleInputvalue" class="form-label" style="color:white">Location</label>
+    <input type="text" name="Location" value="<?php echo $row['Location'] ?>"class="form-control w-50" id="exampleInputvalue" aria-describedby="valueHelp">
     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
   </div>
   <div class=" mb-3" >
-    <label for="exampleInputclient" class="form-label" style="color:white">client</label>
-    <input type="text" name="client" class="form-control w-50 " id="exampleInputclient" aria-describedby="clientHelp">
+    <label for="exampleInputclient" class="form-label" style="color:white">Price</label>
+    <input type="text" name="Price" value="<?php echo $row['Price'] ?>" class="form-control w-50 " id="exampleInputclient" aria-describedby="clientHelp">
     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
   </div>
   <button type="submit" name="submit" class="btn btn-primary">save</button>
