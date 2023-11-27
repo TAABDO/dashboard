@@ -86,26 +86,29 @@ a {
 <table class="table">
     <thead>
       <tr>
-        <th scope="col"class="tableName">NumReservation</th>
-        <th scope="col"class="tableName">date_reservation</th>
-        <th scope="col"class="tableName">TableNumber</th>
-        <th scope="col"class="tableName">client</th>
+	  						
+        <th scope="col"class="tableName">Order_ID</th>
+        <th scope="col"class="tableName">Order_Name</th>
+        <th scope="col"class="tableName">Customer_Name</th>
+        <th scope="col"class="tableName">Location</th>
+        <th scope="col"class="tableName">Price</th>
+
       </tr>
     </thead>
     <tbody>
 
 	<?php
 	 
-	 $requet="SELECT * FROM `reservation`";
+	 $requet="SELECT * FROM `orderes`";
 	 $result= mysqli_query($connect,$requet);
 	 while ($row = mysqli_fetch_assoc($result)){
 	?>
       <tr>
-        
-        <td><?php echo $row['id'] ?></td>
-        <td><?php echo $row['date_reservation']?></td>
-        <td><?php echo $row['TableNumber']?></td>
-		<td><?php echo $row['client_id']?></td>
+	    <td><?php echo $row['id'] ?></td>
+        <td><?php echo $row['Order_Name']?></td>
+        <td><?php echo $row['client_Name']?></td>
+		<td><?php echo $row['Location']?></td>
+        <td><?php echo $row['Price']?></td>
         <td>
 			<button type="submit" class="btn btn-warning"><a href="update.php?id=<?php echo $row["id"] ?>">UpDate</a></button>
             <button type="submit" class="btn btn-danger"><a href="delete.php?id=<?php echo $row["id"] ?>">delete</a></button>
